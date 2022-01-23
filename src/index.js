@@ -1,31 +1,42 @@
 import readlineSync from 'readline-sync';
 
-const name = () => {
-  const text = readlineSync.question('May I have your name? ');
-  return text === '' ? 'new player' : text;
-};
+// Колличество раундов
+const numberOfRounds = 3;
 
-const answerOnQuestion = () => readlineSync.question('Your answer: ');
+const mainPartOfGame = (mainQuestion, stepOfgame) => {
+  // Приветствие
+  console.log('Welcome to the Brain Games!');
+  const name = () => {
+    const text = readlineSync.question('May I have your name? ');
+    return text === '' ? 'new player' : text;
+  };
+  const correctName = name();
+  console.log(`Hello, ${correctName}!`);
 
-const expression = (num1, num2, sign) => {
-  switch (sign) {
-    case '+':
-      return num1 + num2;
-    case '-':
-      return num1 - num2;
-    default:
-      return num1 * num2;
+  // Основные правила:
+  console.log(`${mainQuestion}`);
+
+  let flag = true;
+  let i = 1;
+  while (i < (numberOfRounds + 1) && flag) {
+    const [rightAnswer, expression] = stepOfgame();
+    console.log(`Question: ${expression}`);
+
+    const userAnswer = readlineSync.question('Your answer: ');
+
+    const resultOfround = (userAnswer === rightAnswer);
+    flag = false;
+    if (resultOfround) {
+      if (i === numberOfRounds) {
+        console.log('Correct!');
+        console.log(`Congratulations, ${correctName}!`);
+      }
+      if (i < numberOfRounds) {
+        console.log('Correct!');
+        flag = true;
+        i += 1;
+      }
+    } else { console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${rightAnswer}'. Let's try again, ${correctName}!`); }
   }
 };
-
-const getRandomInt = () => Math.floor(Math.random() * 10);
-const getRandomSign = () => {
-  const number = Math.random();
-  if (number < 0.33) return '+';
-  if (number < 0.66) return '-';
-  return '*';
-};
-
-export {
-  name, answerOnQuestion, expression, getRandomInt, getRandomSign,
-};
+export default mainPartOfGame;
