@@ -1,4 +1,5 @@
 import mainPartOfGame from '../index.js';
+import getRandomInt from '../calculations.js';
 
 const calculation = (num1, num2, sign) => {
   switch (sign) {
@@ -11,7 +12,6 @@ const calculation = (num1, num2, sign) => {
   }
 };
 
-const getRandomInt = () => Math.floor(Math.random() * 10);
 const getRandomSign = () => {
   const number = Math.random();
   if (number < 0.33) return '+';
@@ -21,8 +21,8 @@ const getRandomSign = () => {
 const mainQuestion = 'What is the result of the expression?';
 
 const stepOfgame = () => {
-  const newNumber1 = getRandomInt();
-  const newNumber2 = getRandomInt();
+  const newNumber1 = getRandomInt(1, 10);
+  const newNumber2 = getRandomInt(1, 10);
   const newSign = getRandomSign();
   const rightAnswer = String(calculation(newNumber1, newNumber2, newSign));
   const question = `${newNumber1} ${newSign} ${newNumber2}`;

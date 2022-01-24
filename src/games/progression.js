@@ -1,9 +1,6 @@
 import mainPartOfGame from '../index.js';
+import getRandomInt from '../calculations.js';
 
-const getRandomInt = (min, max) => {
-  const rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
-};
 const mainQuestion = 'What number is missing in the progression?';
 const lengthOfProgression = getRandomInt(6, 12);
 
