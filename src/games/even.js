@@ -8,10 +8,8 @@ const isEven = (number) => {
 const mainQuestion = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 const stepOfgame = () => {
-  const newNumber = getRandomInt(1, 100);
-  const rightAnswer = isEven(newNumber);
-
-  const question = `${newNumber}`;
+  const question = getRandomInt(1, 100);
+  const rightAnswer = isEven(question);
   return [rightAnswer, question];
 };
 export default () => mainPartOfGame(mainQuestion, stepOfgame);
